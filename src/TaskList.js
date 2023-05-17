@@ -1,18 +1,21 @@
-import { useState } from 'react';
+import { useState, useContext } from "react";
+import { TasksContext } from "./TasksContext";
 
-export default function TaskList({tasks, onChangeTask, onDeleteTask}) {
+export default function TaskList() {
+  const tasks = useContext(TasksContext).tasks;
   return (
     <ul>
       {tasks.map((task) => (
         <li key={task.id}>
-          <Task task={task} onChange={onChangeTask} onDelete={onDeleteTask} />
+          <Task task={task} />
         </li>
       ))}
     </ul>
   );
 }
 
-function Task({task, onChange, onDelete}) {
+function Task({ task }) {
+  const { handleDeleteTask, handleChangeTask } = useContext(TasksContext);
   const [isEditing, setIsEditing] = useState(false);
   let taskContent;
   if (isEditing) {
@@ -21,7 +24,7 @@ function Task({task, onChange, onDelete}) {
         <input
           value={task.text}
           onChange={(e) => {
-            onChange({
+            handleChangeTask({
               ...task,
               text: e.target.value,
             });
@@ -44,14 +47,14 @@ function Task({task, onChange, onDelete}) {
         type="checkbox"
         checked={task.done}
         onChange={(e) => {
-          onChange({
+          handleChangeTask({
             ...task,
             done: e.target.checked,
           });
         }}
       />
       {taskContent}
-      <button onClick={() => onDelete(task.id)}>删除</button>
+      <button onClick={() => handleDeleteTask(task.id)}>删除</button>
     </label>
   );
 }

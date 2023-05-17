@@ -1,4 +1,4 @@
-export default function tasksReducer(tasks, action) {
+export function tasksReducer(tasks, action) {
   switch (action.type) {
     case "added": {
       tasks.push({
