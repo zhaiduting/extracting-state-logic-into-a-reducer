@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import { TasksContext } from "./TasksContext";
 export default function AddTask() {
-  const [text, setText] = useState("");console.log('useContext(TasksContext)',useContext(TasksContext))
+  const [text, setText] = useState("");
   const handleAddTask = useContext(TasksContext).handleAddTask;
   return (
     <>
