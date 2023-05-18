@@ -1,7 +1,9 @@
-import { useState } from 'react';
-
-export default function AddTask({onAddTask}) {
-  const [text, setText] = useState('');
+import { useState } from "react";
+import { useContext } from "react";
+import { TasksContext } from "./TasksContext";
+export default function AddTask() {
+  const [text, setText] = useState("");console.log('useContext(TasksContext)',useContext(TasksContext))
+  const handleAddTask = useContext(TasksContext).handleAddTask;
   return (
     <>
       <input
@@ -11,9 +13,10 @@ export default function AddTask({onAddTask}) {
       />
       <button
         onClick={() => {
-          setText('');
-          onAddTask(text);
-        }}>
+          setText("");
+          handleAddTask(text);
+        }}
+      >
         添加
       </button>
     </>
