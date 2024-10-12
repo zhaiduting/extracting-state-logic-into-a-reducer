@@ -16,6 +16,7 @@ export default function AddTask({onAddTask}) {
                     setText('');
                     handleAddTask({
                         text: text,
+                        done: false,
                     })
                 }}>
                 添加
