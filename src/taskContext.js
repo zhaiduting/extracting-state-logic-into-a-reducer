@@ -8,12 +8,12 @@ const initialTasks = [
 ];
 
 export const TaskContext = createContext();
-const _TaskContext = TaskContext.Provider
+const Provider = TaskContext.Provider
 
-TaskContext.Provider = ({children}) => {
+TaskContext.Provider = function ({children}) {
     const [tasks, dispatch] = useReducer(taskReducer, initialTasks);
 
-    return <_TaskContext value={
+    return <Provider value={
         {
             tasks,
             handleAddTask(task) {
@@ -26,5 +26,5 @@ TaskContext.Provider = ({children}) => {
                 dispatch({type: 'deleteTask', task})
             }
         }
-    }>{children}</_TaskContext>;
+    }>{children}</Provider>;
 }
