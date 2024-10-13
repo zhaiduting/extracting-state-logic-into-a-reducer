@@ -10,17 +10,18 @@ let nextId = 3
 export function taskReducer(tasks, action) {
     switch (action.type) {
         case 'addTask': {
-            return [...tasks, {...action.task, id: ++nextId}]
+            tasks.push({...action.task, id: ++nextId})
+            return
         }
         case 'updateTask': {
-            return tasks.map((task) => {
-                return task.id === action.task.id
-                    ? action.task
-                    : task
-            })
+            let index = tasks.findIndex((task) => task.id === action.task.id)
+            if (index >= 0) tasks[index] = action.task
+            return
         }
         case 'deleteTask': {
-            return tasks.filter(task => task.id !== action.task.id)
+            let index = tasks.findIndex((task) => task.id === action.task.id)
+            if (index > -1) tasks.splice(index, 1)
+            return
         }
     }
 }

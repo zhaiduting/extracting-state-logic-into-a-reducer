@@ -1,5 +1,6 @@
-import {createContext, useReducer} from "react";
+import {createContext} from "react";
 import {taskReducer} from "./taskReducer";
+import {useImmerReducer} from "use-immer";
 
 const initialTasks = [
     {id: 0, text: '参观卡夫卡博物馆', done: true},
@@ -11,7 +12,7 @@ export const TaskContext = createContext();
 const Provider = TaskContext.Provider
 
 TaskContext.Provider = function ({children}) {
-    const [tasks, dispatch] = useReducer(taskReducer, initialTasks);
+    const [tasks, dispatch] = useImmerReducer(taskReducer, initialTasks);
 
     return <Provider value={
         {
